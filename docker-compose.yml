@@ -1,0 +1,22 @@
+version: "3"
+services:
+  valheim:
+    image: lloesche/valheim-server:latest
+    ports:
+      - 2456:2456/udp
+      - 2457:2457/udp
+      - 2458:2458/udp
+    environment:
+      - PORT=2456
+      - SEVER_PORT=2456
+      - SEVER_NAME=Super Earth
+      - SERVER_ARGS=--crossplay
+      - WORLD_NAME=SuperEarth
+      - SERVER_PASS=thelocaljw
+      - RESTART_IF_IDLE=true
+      - SERVER_PUBLIC=false
+      - UPDATE_IF_IDLE=true
+      - AUTO_UPDATE_SCHEDULE=0 1 * * *
+      - BACKUPS=true
+    volumes:
+      - .:/config
