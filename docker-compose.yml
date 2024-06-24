@@ -18,5 +18,8 @@ services:
       - UPDATE_IF_IDLE=true
       - AUTO_UPDATE_SCHEDULE=0 1 * * *
       - BACKUPS=true
+      - DISCORD_WEBHOOK=https://discord.com/api/webhooks/1254624822382821480/2lFskNf8dtSSFcO9gxZg6de07SxLnuwn2vHVhjEJMV233pqN5PSqIXAVZXQaoTMO3xQ-
+      - DISCORD_MESSAGE=Super Earth is ready for connections!
+      - 'POST_START_HOOK=curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$$(eval echo $$DISCORD_MESSAGE)\"}" "$$DISCORD_WEBHOOK"'
     volumes:
       - .:/config
