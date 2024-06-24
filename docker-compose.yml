@@ -9,7 +9,7 @@ services:
     environment:
       - PORT=2456
       - SEVER_PORT=2456
-      - SEVER_NAME=Super Earth
+      - SERVER_NAME=Super Earth
       - SERVER_ARGS=-crossplay
       - WORLD_NAME=SuperEarth
       - SERVER_PASS=thelocaljw
