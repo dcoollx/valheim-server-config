@@ -1,1 +1,3 @@
 // List admin players ID  ONE per line
+Steam_76561198026780475
+Steam_76561198044043468
