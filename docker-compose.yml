@@ -10,7 +10,7 @@ services:
       - PORT=2456
       - SEVER_PORT=2456
       - SERVER_NAME=Super Earth
-      - SERVER_ARGS=-crossplay -logfile=./logs
+      - SERVER_ARGS=-crossplay -logfile=./logs -saveinterval=900 -raid=muchless
       - WORLD_NAME=SuperEarth
       - SERVER_PASS=thelocaljw
       - RESTART_IF_IDLE=true
