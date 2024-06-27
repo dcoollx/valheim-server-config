@@ -6,9 +6,14 @@ services:
       - 2456:2456/udp
       - 2457:2457/udp
       - 2458:2458/udp
+      - 3000:3000/tcp
+      - 9001:9001/tcp
     environment:
+      - SUPERVISOR_HTTP=true
+      - BEPINEX=true
+      - SUPERVISOR_HTTP_PASS=thelocaljw_admin
       - PORT=2456
-      - SEVER_PORT=2456
+      - SERVER_PORT=2456
       - SERVER_NAME=Super Earth
       - SERVER_ARGS=-crossplay -logfile=./logs
       - WORLD_NAME=SuperEarth
@@ -20,3 +25,4 @@ services:
       - BACKUPS=true
     volumes:
       - .:/config
+      - ./logs:/logs
