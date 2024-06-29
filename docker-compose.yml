@@ -7,19 +7,21 @@ services:
       - 2457:2457/udp
       - 2458:2458/udp
     environment:
-      - PORT=2456
-      - SEVER_PORT=2456
-      - SERVER_NAME=Super Earth
-      - SERVER_ARGS=-crossplay -logfile=./logs -saveinterval=900 -raid=muchless
-      - WORLD_NAME=SuperEarth
-      - SERVER_PASS=thelocaljw
-      - RESTART_IF_IDLE=true
-      - SERVER_PUBLIC=false
-      - UPDATE_IF_IDLE=true
-      - AUTO_UPDATE_SCHEDULE=0 1 * * *
-      - BACKUPS=true
-      - DISCORD_WEBHOOK=https://discord.com/api/webhooks/1254624822382821480/2lFskNf8dtSSFcO9gxZg6de07SxLnuwn2vHVhjEJMV233pqN5PSqIXAVZXQaoTMO3xQ-
-      - DISCORD_MESSAGE=Super Earth is ready for connections!
-      - 'POST_START_HOOK=curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$$(eval echo $$DISCORD_MESSAGE)\"}" "$$DISCORD_WEBHOOK"'
+      PORT: 2456
+      SERVER_PORT: 2456
+      SERVER_NAME: "Super Earth"
+      SERVER_ARGS: "-crossplay -logfile=./logs -saveinterval=900 -raid=muchless"
+      WORLD_NAME: "SuperEarth" 
+      SERVER_PASS: "thelocaljw"
+      RESTART_IF_IDLE: "true"
+      SERVER_PUBLIC: "false"
+      UPDATE_IF_IDLE: true
+      AUTO_UPDATE_SCHEDULE: "0 1 * * *"
+      BACKUPS: true
+      Notify: '${NOTIFY}'
+      DISCORD_WEBHOOK: "https://discord.com/api/webhooks/1254624822382821480/2lFskNf8dtSSFcO9gxZg6de07SxLnuwn2vHVhjEJMV233pqN5PSqIXAVZXQaoTMO3xQ-"
+      DISCORD_MESSAGE: "Super Earth is ready for connections!"
+      POST_START_HOOK: bash ./scripts/notify.sh
+      PRE_SERVER_SHUTDOWN_HOOK: bash ./scripts/warn.sh
     volumes:
       - .:/config
