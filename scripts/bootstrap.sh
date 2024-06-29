@@ -24,4 +24,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 # install docker compose
 
 sudo apt install docker-compose
+
+#disable some protections
 sudo ufw disable
+git config --global --add safe.directory /home/ubuntu/valheim-server-config
