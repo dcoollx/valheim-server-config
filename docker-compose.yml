@@ -1,6 +1,7 @@
 version: "3"
+name: "valheim"
 services:
-  valheim:
+  server:
     image: lloesche/valheim-server:latest
     ports:
       - 2456:2456/udp
@@ -25,3 +26,4 @@ services:
       PRE_SERVER_SHUTDOWN_HOOK: bash ./scripts/warn.sh
     volumes:
       - .:/config
+      - ./logs:./logs
