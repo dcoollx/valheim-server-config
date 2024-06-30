@@ -1,4 +1,5 @@
 version: "3"
+name: valheim
 services:
   valheim:
     image: lloesche/valheim-server:latest
