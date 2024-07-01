@@ -28,3 +28,5 @@ sudo apt install docker-compose
 #disable some protections
 sudo ufw disable
 git config --global --add safe.directory /home/ubuntu/valheim-server-config
+cp ../.env.example ../.env
+sudo shutdown -r now
