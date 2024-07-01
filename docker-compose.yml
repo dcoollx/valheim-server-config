@@ -7,6 +7,7 @@ services:
       - 2456:2456/udp
       - 2457:2457/udp
       - 2458:2458/udp
+    env_file: .env
     environment:
       PORT: 2456
       SERVER_PORT: 2456
@@ -22,8 +23,8 @@ services:
       Notify: '${NOTIFY}'
       DISCORD_WEBHOOK: "https://discord.com/api/webhooks/1254624822382821480/2lFskNf8dtSSFcO9gxZg6de07SxLnuwn2vHVhjEJMV233pqN5PSqIXAVZXQaoTMO3xQ-"
       DISCORD_MESSAGE: "Super Earth is ready for connections!"
-      POST_START_HOOK: bash ./scripts/notify.sh
-      PRE_SERVER_SHUTDOWN_HOOK: bash ./scripts/warn.sh
+      POST_START_HOOK: "bash /config/scripts/notify.sh"
+      PRE_SERVER_SHUTDOWN_HOOK: "bash /config/scripts/warn.sh"
     volumes:
       - .:/config
-      - ./logs:./logs
+      - ./logs:/config/logs
