@@ -1,6 +1,7 @@
 version: "3"
+name: valheim
 services:
-  valheim:
+  server:
     image: lloesche/valheim-server:latest
     ports:
       - 2456:2456/udp
@@ -8,21 +9,27 @@ services:
       - 2458:2458/udp
       - 3000:3000/tcp
       - 9001:9001/tcp
+    env_file: .env
     environment:
-      - SUPERVISOR_HTTP=true
-      - BEPINEX=true
-      - SUPERVISOR_HTTP_PASS=thelocaljw_admin
-      - PORT=2456
-      - SERVER_PORT=2456
-      - SERVER_NAME=Super Earth
-      - SERVER_ARGS=-crossplay -logfile=./logs
-      - WORLD_NAME=SuperEarth
-      - SERVER_PASS=thelocaljw
-      - RESTART_IF_IDLE=true
-      - SERVER_PUBLIC=false
-      - UPDATE_IF_IDLE=true
-      - AUTO_UPDATE_SCHEDULE=0 1 * * *
-      - BACKUPS=true
+      SUPERVISOR_HTTP: true
+      BEPINEX: true
+      SUPERVISOR_HTTP_PASS: thelocaljw_admin
+      PORT: 2456
+      SERVER_PORT: 2456
+      SERVER_NAME: "Super Earth"
+      SERVER_ARGS: "-crossplay -logfile=./logs -saveinterval=900 -raid=muchless"
+      WORLD_NAME: "SuperEarth" 
+      SERVER_PASS: "thelocaljw"
+      RESTART_IF_IDLE: "true"
+      SERVER_PUBLIC: "false"
+      UPDATE_IF_IDLE: true
+      AUTO_UPDATE_SCHEDULE: "0 1 * * *"
+      BACKUPS: true
+      Notify: '${NOTIFY}'
+      DISCORD_WEBHOOK: "https://discord.com/api/webhooks/1254624822382821480/2lFskNf8dtSSFcO9gxZg6de07SxLnuwn2vHVhjEJMV233pqN5PSqIXAVZXQaoTMO3xQ-"
+      DISCORD_MESSAGE: "Super Earth is ready for connections!"
+      POST_START_HOOK: "bash /config/scripts/notify.sh"
+      PRE_SERVER_SHUTDOWN_HOOK: "bash /config/scripts/warn.sh"
     volumes:
       - .:/config
-      - ./logs:/logs
+      - ./logs:/config/logs
