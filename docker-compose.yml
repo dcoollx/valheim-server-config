@@ -1,0 +1,32 @@
+version: "3"
+name: valheim
+services:
+  server:
+    image: lloesche/valheim-server:latest
+    ports:
+      - 2456:2456/udp
+      - 2457:2457/udp
+      - 2458:2458/udp
+    env_file: .env
+    environment:
+      PORT: 2456
+      SERVER_PORT: 2456
+      SERVER_NAME: "Super Earth"
+      SERVER_ARGS: "-crossplay -logfile=./logs -saveinterval=900 -raid=muchless"
+      WORLD_NAME: "SuperEarth" 
+      SERVER_PASS: "thelocaljw"
+      RESTART_IF_IDLE: "true"
+      BACKUPS_MAX_COUNT: 10
+      SERVER_PUBLIC: "false"
+      UPDATE_IF_IDLE: true
+      AUTO_UPDATE_SCHEDULE: "0 1 * * *"
+      BACKUPS: true
+      Notify: '${NOTIFY}'
+      DISCORD_WEBHOOK: "https://discord.com/api/webhooks/1254624822382821480/2lFskNf8dtSSFcO9gxZg6de07SxLnuwn2vHVhjEJMV233pqN5PSqIXAVZXQaoTMO3xQ-"
+      DISCORD_MESSAGE: "Super Earth is ready for connections!"
+      POST_START_HOOK: "bash /config/scripts/notify.sh"
+      PRE_SERVER_SHUTDOWN_HOOK: "bash /config/scripts/warn.sh"
+      POST_RESTART_HOOK: "bash /config/scripts/updating.sh"
+    volumes:
+      - .:/config
+      - ../logs:/config/logs
